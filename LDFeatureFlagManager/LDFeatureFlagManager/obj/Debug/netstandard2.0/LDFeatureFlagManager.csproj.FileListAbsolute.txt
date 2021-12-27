@@ -1,0 +1,8 @@
+E:\FeatureFlagManager\LDFeatureFlagManager\LDFeatureFlagManager\bin\Debug\netstandard2.0\LDFeatureFlagManager.deps.json
+E:\FeatureFlagManager\LDFeatureFlagManager\LDFeatureFlagManager\bin\Debug\netstandard2.0\LDFeatureFlagManager.dll
+E:\FeatureFlagManager\LDFeatureFlagManager\LDFeatureFlagManager\obj\Debug\netstandard2.0\LDFeatureFlagManager.csproj.CoreCompileInputs.cache
+E:\FeatureFlagManager\LDFeatureFlagManager\LDFeatureFlagManager\obj\Debug\netstandard2.0\LDFeatureFlagManager.AssemblyInfoInputs.cache
+E:\FeatureFlagManager\LDFeatureFlagManager\LDFeatureFlagManager\obj\Debug\netstandard2.0\LDFeatureFlagManager.AssemblyInfo.cs
+E:\FeatureFlagManager\LDFeatureFlagManager\LDFeatureFlagManager\bin\Debug\netstandard2.0\LDFeatureFlagManager.pdb
+E:\FeatureFlagManager\LDFeatureFlagManager\LDFeatureFlagManager\obj\Debug\netstandard2.0\LDFeatureFlagManager.dll
+E:\FeatureFlagManager\LDFeatureFlagManager\LDFeatureFlagManager\obj\Debug\netstandard2.0\LDFeatureFlagManager.pdb
