@@ -1,0 +1,14 @@
+Startup class is the entry point of the ASP.NET Core application. 
+This class contains the application configuration related items.
+ 
+ public class Program
+ {
+ public static void Main(string[] args)
+ {
+ CreateWebHostBuilder(args).Build().Run();
+ }
+ 
+ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+ WebHost.CreateDefaultBuilder(args)
+ .UseStartup<TestClass>();
+ }
