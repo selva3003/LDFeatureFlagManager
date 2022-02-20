@@ -1,14 +1,69 @@
 Startup class is the entry point of the ASP.NET Core application. 
 This class contains the application configuration related items.
- 
- public class Program
- {
- public static void Main(string[] args)
- {
- CreateWebHostBuilder(args).Build().Run();
- }
- 
- public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
- WebHost.CreateDefaultBuilder(args)
- .UseStartup<TestClass>();
- }
+  public class Program
+  {
+  public static void Main(string[] args)
+  {
+  CreateWebHostBuilder(args).Build().Run();
+  }
+
+  public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+  WebHost.CreateDefaultBuilder(args)
+  .UseStartup<TestClass>();
+  }
+  
+  //This method calls first when the application is requested for the first time
+ // Using this method, we can add the services to the DI container,so services are available as a dependency in controller constructor.
+ public void ConfigureServices(IServiceCollection services)  
+{
+    services.Configure<AppSettings>(Configuration.GetSubKey("AppSettings"));
+    services.AddEntityFramework()
+            .AddSqlServer()
+            .AddDbContext<SchoolContext>();
+    // Add MVC services to the services container.
+    services.AddMvc();
+}
+//method is used to specify how the application will respond to HTTP requests.
+//The request pipeline is configured by adding middleware components to an IApplicationBuilder instance that is provided by dependency injection
+public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+{
+    loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+    loggerFactory.AddDebug();
+  
+    app.UseApplicationInsightsRequestTelemetry();
+  
+    if (env.IsDevelopment())
+    {
+        app.UseBrowserLink();
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Home/Error");
+  
+        // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
+        try
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                serviceScope.ServiceProvider.GetService<ApplicationDbContext>()
+                        .Database.Migrate();
+            }
+        }
+        catch { }
+    }
+  
+    app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
+    app.UseStaticFiles();
+    app.UseIdentity();
+  
+    // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
+  
+    app.UseMvc(routes =>
+    {
+        routes.MapRoute(
+            name: "default",
+            template: "{controller=Home}/{action=Index}/{id?}");
+    });
+}
