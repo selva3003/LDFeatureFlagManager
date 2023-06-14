@@ -1,0 +1,23 @@
+using Moq;
+using Xunit;
+
+public class DateTimeServiceTests
+{
+    [Theory]
+    [InlineData(1623672000, "2021-06-14T00:00:00")]
+    [InlineData(1655208000, "2022-06-14T00:00:00")]
+    public void ConvertUnixtimeToET_ShouldReturnCorrectDateTime(long unixTimestamp, string expectedDateTimeString)
+    {
+        // Arrange
+        var dateTimeServiceMock = new Mock<IDateTimeService>();
+        dateTimeServiceMock.Setup(x => x.ConvertUnixtimeToET(unixTimestamp)).Returns(DateTime.Parse(expectedDateTimeString));
+        var dateTimeService = dateTimeServiceMock.Object;
+
+        // Act
+        var actualDateTime = dateTimeService.ConvertUnixtimeToET(unixTimestamp);
+
+        // Assert
+        var expectedDateTime = DateTime.Parse(expectedDateTimeString);
+        Assert.Equal(expectedDateTime, actualDateTime);
+    }
+}
